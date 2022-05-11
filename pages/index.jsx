@@ -1,7 +1,6 @@
-import { Fragment, useState } from 'react'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import { Menu, Transition } from '@headlessui/react'
 import { DotsVerticalIcon } from '@heroicons/react/outline'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
 import {
   add,
   eachDayOfInterval,
@@ -18,6 +17,7 @@ import {
   startOfToday,
   startOfWeek,
 } from 'date-fns'
+import { Fragment, useState } from 'react'
 
 const meetings = [
   {
@@ -35,6 +35,14 @@ const meetings = [
       'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
     startDatetime: '2022-05-20T09:00',
     endDatetime: '2022-05-20T11:30',
+  },
+  {
+    id: 3,
+    name: 'Dries Vincent',
+    imageUrl:
+      'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+    startDatetime: '2022-05-20T17:00',
+    endDatetime: '2022-05-20T18:30',
   },
 ]
 
@@ -79,8 +87,9 @@ export default function IndexPage() {
               <h2 className="flex-auto font-semibold text-gray-900">
                 {format(firstDayOfCurrentMonth, 'MMMM yyyy')}
               </h2>
+
               <button
-                onClick={previous}
+                onClick={next}
                 type="button"
                 className="-my-1.5 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
@@ -88,7 +97,7 @@ export default function IndexPage() {
                 <ChevronLeftIcon className="w-5 h-5" aria-hidden="true" />
               </button>
               <button
-                onClick={next}
+                onClick={previous}
                 type="button"
                 className="-my-1.5 -mr-1.5 ml-2 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
               >
@@ -110,7 +119,7 @@ export default function IndexPage() {
                 <div
                   key={day.date}
                   className={classNames(
-                    dayIdx > 6 && 'border-t border-gray-200',
+                    // dayIdx > 6 && 'border-t border-gray-200',
                     dayIdx === 0 && colStartClasses[getDay(day.date)],
                     'pb-2 pt-4'
                   )}
